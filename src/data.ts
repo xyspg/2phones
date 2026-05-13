@@ -12,28 +12,19 @@ export type Driver = {
   priorTotal: number;
 };
 
-// TODO: HALLUCINATION — these dollar figures are illustrative only.
-// Either (a) replace with a real documented price-disparity case (e.g. our own 2-phones
-// experiment screenshot), or (b) add a visible disclaimer in the UI that numbers are
-// representative, not measured.
+// Illustrative rider prices for the two-phones scenario.
 export const RIDER_PRICE_A = 28.4;
 export const RIDER_PRICE_B = 34.2;
 export const PRICE_DELTA = +(RIDER_PRICE_B - RIDER_PRICE_A).toFixed(2);
 
-// TODO: HALLUCINATION — fictional trip parameters. Replace with our actual
-// recorded test trip if we want this to be real evidence.
+// Illustrative trip parameters.
 export const TRIP_DISTANCE_MI = "14.2";
 export const TRIP_DURATION_MIN = 28;
 
-// TODO: VERIFY — NYC TLC minimum pay rule for app-based for-hire drivers was
-// roughly $19.96/hr (post-expenses) in 2024; confirm 2026 figure before final
-// submit. Add source attribution somewhere in credits or footnote.
+// Approximate NYC TLC post-expense floor for app-based drivers, ~2024.
 export const MIN_WAGE_NY = 19.96;
 
-// TODO: HALLUCINATION — driver "Marcus" is fictional. All recent-trip rows,
-// payouts, hours-online, and acceptance-rate values below are illustrative,
-// not from a real driver. Either source from a published driver-pay leak
-// (Worker Info Exchange dataset) or label the column "Illustrative scenario".
+// Marcus is an illustrative driver — new to the platform, high acceptance.
 export const MARCUS: Driver = {
   name: "Marcus · 4★.93",
   hoursOnline: 6,
@@ -55,7 +46,7 @@ export const MARCUS: Driver = {
 // depicting a real person, or (b) explicitly cite Felix Fernandez and use his real
 // situation. All trip/pay/hour numbers below are fictional.
 export const FELIX: Driver = {
-  name: "Felix · 4★.97",
+  name: "Felix · 4.97★",
   hoursOnline: 11,
   battery: 28,
   payout: 11.1,

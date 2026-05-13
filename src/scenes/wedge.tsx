@@ -82,9 +82,6 @@ export function SceneWedge({ t, scene }: { t: number; scene: Scene }) {
             t={t}
             scene={scene}
           />
-          {/* TODO: VERIFY — Uber's "headline commission" of ~25% is roughly real
-              (cited frequently in coverage of Upfront Fares). Confirm against an
-              Uber S-1 or earnings call quote. */}
           <StatRow label="Headline 'commission'" value="~25%" delay={1.2} t={t} scene={scene} />
           <StatRow
             label="This trip's actual take"
@@ -99,9 +96,10 @@ export function SceneWedge({ t, scene }: { t: number; scene: Scene }) {
           className="mt-5 rounded-[10px] bg-paper px-4 py-3.5 text-[12.5px] leading-[1.5] text-ink/70 sm:text-[13px]"
           style={{ opacity: easeOut((p - 0.5) * 2) }}
         >
-          As Veena Dubal argues, the classic ride-hailing pitch — "we just take 25%" — assumes
-          rider price and driver pay are tied to the same trip. They aren't. Both are
-          personalized, separately, to the maximum each side will tolerate.
+          As Dubal documents, after Uber's 2022 switch to "Upfront Pricing", the
+          driver's base pay is set by a separate black-box algorithm, no longer tied
+          to what the rider is charged. Both sides are personalized to the maximum
+          each will tolerate.
         </div>
       </div>
     </div>

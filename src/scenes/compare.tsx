@@ -33,7 +33,7 @@ export function SceneCompare({ onBothRequested }: { onBothRequested: () => void 
           >
             {revealed
               ? "The algorithm learned what each phone will tolerate."
-              : "Tap Request on both phones — same pickup, same destination."}
+              : "Tap Request on both phones. Same pickup, same destination."}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -116,8 +116,8 @@ export function SceneCompare({ onBothRequested }: { onBothRequested: () => void 
                 The essay only commits to acceptance rate, hours online, and decline
                 streak as documented driver-side signals. */}
             <div className="max-w-[500px] text-center font-sans text-[12px] text-ink/55">
-              Different phones, different price-shopping histories — the kind of
-              signals the model is suspected of personalizing on.
+              Different phones, different price-shopping histories. These are the
+              kind of signals the model is suspected of personalizing on.
             </div>
           </motion.div>
         )}

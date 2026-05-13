@@ -5,17 +5,17 @@ const INTERVENTIONS = [
   {
     n: "01",
     title: "No personalization on pay",
-    d: "Pay tied only to trip variables — time, distance, zone, waiting time — never to a driver's individual desperation signals.",
+    d: "Pay is based only on trip variables: time, distance, zone, and waiting time. Not on a driver's individual desperation signals.",
   },
   {
     n: "02",
     title: "Mandatory algorithm disclosure",
-    d: "Uber, Doordash, Instacart, and similar platforms must publish a reproducible pay formula the public can audit.",
+    d: "Uber, Doordash, Instacart, and similar platforms must publish a reproducible pay formula that the public can audit.",
   },
   {
     n: "03",
     title: "Driver-owned audits",
-    d: "Independent driver-led organizations — including the software engineers who drive part-time — hold standing audit rights over the model.",
+    d: "Independent driver-led organizations hold standing audit rights over the model. This includes the software engineers who drive part-time.",
   },
 ];
 

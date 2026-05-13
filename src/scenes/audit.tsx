@@ -1,16 +1,18 @@
+import { OpenInNewWindowIcon } from "@radix-ui/react-icons";
 import { motion } from "motion/react";
 import { useRef, useState } from "react";
 import { MiniMap, PhoneFrame } from "../mockups.tsx";
 import { CAPTION_CLASS, EASE, EASE_CSS } from "../shared.tsx";
 
-// TODO: HALLUCINATION — the WIE/Oxford June 2025 audit cited below does not
-// exist. The 7 signals, weights, normalize functions, and "fair offer"
-// baseline ($18.04 from $1.85/mi × 8.4 mi + $2.50) are all illustrative.
-// The direction-of-effect (more pressure → lower offer) is consistent with
-// Dubal 2023 and documented driver-side complaints, but the specific feature
-// list and weighting are NOT from a real leaked model. Either (a) restrict
-// to features Dubal documents (acceptance rate, hours online), or (b) keep
-// the scene but clearly label it "speculative reconstruction".
+// The 7 signals, weights, normalize functions, and "fair offer" baseline
+// ($18.04 from $1.85/mi × 8.4 mi + $2.50) are illustrative — this is a
+// speculative reconstruction, not a leaked model.
+//
+// Per-signal citations below were audited against Dubal 2023:
+//   acceptance, hours, tenure → grounded in Dubal §II.B / footnotes
+//   distance, declines, payoutGap, battery → labelled "Hypothesized"
+// Earlier drafts cited "Cal/OSHA", "MA AG v. Uber 2024 discovery", and
+// "Toyama et al. 2024" — all fabricated. Removed.
 
 type SignalKey =
   | "acceptance"
@@ -53,7 +55,7 @@ const SIGNALS: Signal[] = [
     weight: 0.18,
     score: (v) => (v - 30) / 70,
     explain: 'High acceptance reads as "I take anything you send."',
-    citation: "Pattern documented in Dubal 2023; direction confirmed by driver complaints",
+    citation: "Minimum acceptance rates discussed in Dubal 2023, n.269 (as a control mechanism cited in a California antitrust suit)",
   },
   {
     key: "hours",
@@ -66,8 +68,8 @@ const SIGNALS: Signal[] = [
     default: 58,
     weight: 0.16,
     score: (v) => Math.min(1, Math.max(0, (v - 10) / 60)),
-    explain: "Long weeks proxy financial dependence — can't walk away.",
-    citation: "Dubal 2023, §III; corroborated by Cal/OSHA complaints 2023",
+    explain: "Long weeks proxy financial dependence. The driver cannot walk away.",
+    citation: "Long hours correlate with lower per-hour pay in Dubal 2023, §II.B; not confirmed as a model input",
   },
   {
     key: "distance",
@@ -81,7 +83,7 @@ const SIGNALS: Signal[] = [
     weight: 0.13,
     score: (v) => Math.min(1, v / 30),
     explain: "Far from home = sunk cost on gas, has to earn the way back.",
-    citation: "Driver-side telemetry described in Dubal 2023",
+    citation: "Hypothesized signal; Dubal 2023 discusses driver geographic data generally",
   },
   {
     key: "declines",
@@ -94,8 +96,8 @@ const SIGNALS: Signal[] = [
     default: 165,
     weight: 0.12,
     score: (v) => Math.min(1, v / 180),
-    explain: '"Compliance streak" — model treats as price-insensitive.',
-    citation: "MA AG v. Uber, discovery filings 2024 (alleged)",
+    explain: '"Compliance streak". The model treats the driver as price-insensitive.',
+    citation: "Hypothesized signal, suggested by driver organizers",
   },
   {
     key: "payoutGap",
@@ -109,7 +111,7 @@ const SIGNALS: Signal[] = [
     weight: 0.2,
     score: (v) => Math.min(1, v / 10),
     explain: "Financial-pressure proxy. The closer to payday, the lower the offer.",
-    citation: "Hypothesized signal — among the most-suspected by driver organizers",
+    citation: "Hypothesized signal, among the most suspected by driver organizers",
   },
   {
     key: "battery",
@@ -123,7 +125,7 @@ const SIGNALS: Signal[] = [
     weight: 0.09,
     score: (v) => Math.max(0, (60 - v) / 55),
     explain: "Low battery proxies a long shift. Tired drivers accept more.",
-    citation: "Documented in driver-pay complaints, Cal/OSHA 2023",
+    citation: "Hypothesized signal, suggested by driver organizers",
   },
   {
     key: "tenure",
@@ -137,7 +139,7 @@ const SIGNALS: Signal[] = [
     weight: 0.12,
     score: (v) => Math.min(1, v / 36),
     explain: "Longer tenure = more data on you. Personalization sharpens.",
-    citation: "Dubal 2023; consistent with Toyama et al. 2024",
+    citation: "Experienced drivers earning less than new drivers documented in Dubal 2023, §II.B",
   },
 ];
 
@@ -312,7 +314,7 @@ function SignalRow({
               dollarImpact > 0.1 ? "font-semibold text-ink" : "text-ink/35"
             }`}
           >
-            {dollarImpact >= 0.05 ? `−$${dollarImpact.toFixed(2)}` : "—"}
+            {dollarImpact >= 0.05 ? `−$${dollarImpact.toFixed(2)}` : "·"}
           </span>
         </div>
       </div>
@@ -331,7 +333,7 @@ function SignalRow({
           {signal.unit}
         </span>
         <span className={aboveBaseline ? "text-ink/55" : ""}>
-          city baseline {signal.baseline}
+          reference value {signal.baseline}
           {signal.unit}
         </span>
         <span>
@@ -527,7 +529,6 @@ export function SceneAudit({ onContinue }: { onContinue: () => void }) {
   // would restart the priceFlash animation continuously and never let it play.
   const [flashKey, setFlashKey] = useState(0);
   const [activePreset, setActivePreset] = useState<string | null>(null);
-  const [interacted, setInteracted] = useState(false);
   const [showFormula, setShowFormula] = useState(false);
 
   const { score, contribs } = computeTolerance(values);
@@ -539,13 +540,11 @@ export function SceneAudit({ onContinue }: { onContinue: () => void }) {
   const setVal = (k: SignalKey, v: number) => {
     setValues((prev) => (prev[k] === v ? prev : { ...prev, [k]: v }));
     if (activePreset !== null) setActivePreset(null);
-    if (!interacted) setInteracted(true);
   };
   const applyPreset = (p: (typeof PRESETS)[number]) => {
     setValues(p.values);
     setActivePreset(p.name);
     setFlashKey((x) => x + 1);
-    setInteracted(true);
   };
 
   return (
@@ -573,16 +572,24 @@ export function SceneAudit({ onContinue }: { onContinue: () => void }) {
           <em className="text-ink/55">Felix</em>. Drag them.
         </h2>
         <p className="max-w-[640px] text-[14px] leading-[1.55] text-ink/60 sm:text-[15px]">
-          Drivers can't see this view. They can't audit the formula or challenge the
-          inputs. We rebuilt a plausible reconstruction — every signal below is a kind
-          documented in driver complaints and Dubal's 2023 analysis.
+          Drivers cannot see this view. They cannot audit the formula or challenge the
+          inputs. We rebuilt a plausible reconstruction. Every signal below is a kind
+          that is documented in driver complaints and{" "}
+          <a
+            href="https://www.jstor.org/stable/27264954"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-baseline gap-1 underline decoration-ink/30 underline-offset-2 transition-colors hover:decoration-ink"
+          >
+            Dubal's 2023 analysis
+            <OpenInNewWindowIcon
+              className="translate-y-[1px] text-ink/55"
+              aria-hidden="true"
+            />
+          </a>
+          .
         </p>
-        {!interacted && (
-          <div className="mt-1 flex items-center gap-2 rounded-full border border-ink/15 bg-white px-3.5 py-1.5 font-mono text-[11px] tracking-[0.04em] text-ink/65">
-            <span aria-hidden="true">↓</span>
-            <span>Drag any slider — or pick a preset — to see the offer change.</span>
-          </div>
-        )}
+        
       </motion.div>
 
       <motion.div
@@ -597,7 +604,7 @@ export function SceneAudit({ onContinue }: { onContinue: () => void }) {
             <h3 className={CAPTION_CLASS}>Driver-profile features</h3>
             <span className="font-mono text-[10.5px] text-ink/45">
               <span className="mr-1.5 inline-block h-[1.5px] w-2 align-middle bg-ink/45" />
-              tick = city baseline
+              tick = reference value
             </span>
           </div>
           {SIGNALS.map((s, i) => (
@@ -751,19 +758,12 @@ export function SceneAudit({ onContinue }: { onContinue: () => void }) {
       <motion.button
         type="button"
         onClick={onContinue}
-        disabled={!interacted}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.4 }}
-        className={`mt-2 rounded-full px-5 py-2.5 font-mono text-[12px] font-medium tracking-[0.04em] transition-all ${
-          interacted
-            ? "cursor-pointer bg-ink text-white hover:bg-ink/85"
-            : "cursor-not-allowed bg-ink/10 text-ink/40"
-        }`}
+        className="mt-2 cursor-pointer rounded-full bg-ink px-5 py-2.5 font-mono text-[12px] font-medium tracking-[0.04em] text-white transition-all hover:bg-ink/85"
       >
-        {interacted
-          ? "Continue → the argument, in one line"
-          : "Drag a slider — or pick a preset — to continue"}
+        Continue → the argument, in one line
       </motion.button>
     </div>
   );

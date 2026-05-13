@@ -106,16 +106,20 @@ export function Chrome({
                 key={s.id}
                 type="button"
                 onClick={() => onScene(s)}
-                className="relative h-1 cursor-pointer overflow-hidden rounded-full border-0 bg-ink/[0.08] p-0"
+                aria-label={`Jump to ${s.label}`}
+                title={s.label}
+                className="group relative cursor-pointer border-0 bg-transparent px-0 py-2"
                 style={{ flex: len }}
               >
-                <div
-                  className="absolute inset-0 rounded-full bg-ink"
-                  style={{
-                    width: `${pct}%`,
-                    transition: active ? "none" : "width 0.4s",
-                  }}
-                />
+                <div className="relative h-1 overflow-hidden rounded-full bg-ink/[0.08] transition-[height] duration-150 group-hover:h-1.5">
+                  <div
+                    className="absolute inset-0 rounded-full bg-ink"
+                    style={{
+                      width: `${pct}%`,
+                      transition: active ? "none" : "width 0.4s",
+                    }}
+                  />
+                </div>
               </button>
             );
           })}

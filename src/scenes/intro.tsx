@@ -23,7 +23,7 @@ export function SceneIntro({ t, scene }: { t: number; scene: Scene }) {
         className="max-w-[560px] text-center text-[15px] leading-[1.5] text-ink/60 sm:text-[16px]"
         style={{ opacity: easeOut((p - 0.4) * 3) }}
       >
-        Watch what each phone is told it should pay.
+        Watch what each phone is told to pay.
       </div>
     </div>
   );

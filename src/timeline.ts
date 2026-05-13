@@ -22,9 +22,9 @@ type SceneDef = { id: SceneId; duration: number; label: string };
 
 const SCENE_DEFS: SceneDef[] = [
   { id: "intro", duration: 7, label: "01 / Setup" },
-  { id: "compare", duration: 6, label: "02 / Same trip — different price" },
+  { id: "compare", duration: 6, label: "02 / Same trip, different price" },
   { id: "flip", duration: 6, label: "03 / Now look at the drivers" },
-  { id: "driver", duration: 12, label: "04 / Same trip — different pay" },
+  { id: "driver", duration: 12, label: "04 / Same trip, different pay" },
   { id: "wedge", duration: 12, label: "05 / Where the difference goes" },
   { id: "sim", duration: 18, label: "06 / Live: the algorithm learns" },
   { id: "audit", duration: 22, label: "07 / Audit the dashboard Felix can't see" },

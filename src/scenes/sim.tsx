@@ -2,9 +2,9 @@ import { useMemo } from "react";
 import { CAPTION_CLASS, EASE_CSS } from "../shared.tsx";
 import { type Scene } from "../timeline.ts";
 
-// TODO: HALLUCINATION — entire trip stream is fictional. To make this a real
-// argument, replace with anonymized data from Dubal's appendix or the Oxford /
-// Worker Info Exchange June 2025 audit, OR mark the panel as "Simulation" in the UI.
+// Trip stream is an illustrative scenario, not real driver data. The
+// surrounding UI ("Live · the algorithm learns" caption, "Watch the offers
+// fall as the model learns" headline) frames the panel as a simulation.
 const TRIPS = [
   { mi: 6.4, payTime: 14.2 },
   { mi: 11.2, payTime: 19.8 },
@@ -18,8 +18,9 @@ const TRIPS = [
 
 // Reserve a tail of the scene so the final state lingers; trips fill the rest evenly.
 const TRIPS_TAIL_HOLD_S = 4;
-// TODO: HALLUCINATION — $1.85/mi "city baseline" is not sourced. Replace with a real
-// per-mile baseline from a city study (e.g. NYC TLC driver-pay reports).
+// $1.85/mi is an illustrative baseline, not a sourced figure. NYC TLC's actual
+// per-mile minimum is lower and combined with a per-minute rate. The label in
+// the UI below is "illustrative baseline" to avoid claiming authority.
 const BASE_RATE = 1.85;
 
 export function SceneSim({ t, scene }: { t: number; scene: Scene }) {
@@ -172,7 +173,7 @@ export function SceneSim({ t, scene }: { t: number; scene: Scene }) {
               <div className="text-[13px] text-ink/50">per mile</div>
             </div>
             <div className="font-mono text-[11px] text-ink/50">
-              vs ${baseRate.toFixed(2)} city baseline ·{" "}
+              vs ${baseRate.toFixed(2)} illustrative baseline ·{" "}
               <span
                 className={`font-semibold ${
                   avgPerMi < baseRate ? "text-ink" : "text-ink/50"
@@ -197,15 +198,12 @@ export function SceneSim({ t, scene }: { t: number; scene: Scene }) {
         </div>
       </div>
 
-      {/* TODO: HALLUCINATION — the closing claim ("the model will offer accordingly
-          tomorrow") asserts a specific learning behavior that we haven't sourced.
-          Consistent with Dubal's argument about personalized minimums but should be
-          either (a) attributed inline to Dubal or (b) softened to "this is the
-          mechanism Dubal describes". */}
+      {/* The closing claim is attributed to Dubal in line, since the "personalized
+          minimum" mechanism is exactly what she describes in §II.A. */}
       {tripIdx >= trips.length && (
         <div className="scene-fade mt-1.5 max-w-[640px] rounded-full bg-ink px-5 py-3.5 text-center font-mono text-[12px] font-medium tracking-[0.04em] text-white sm:text-[13px]">
-          → Felix's personal "fair" rate is now ${avgPerMi.toFixed(2)}/mi. The model will offer
-          accordingly tomorrow.
+          → Felix's personal "fair" rate is now ${avgPerMi.toFixed(2)}/mi. This is the
+          personalized-minimum mechanism Dubal describes.
         </div>
       )}
     </div>

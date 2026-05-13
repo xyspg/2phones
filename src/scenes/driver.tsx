@@ -77,8 +77,8 @@ export function SceneDriver({ onBothAccepted }: { onBothAccepted: () => void }) 
             className="mt-2.5 font-mono text-[13px] tracking-[0.01em] text-ink/55 sm:text-[14.5px]"
           >
             {both
-              ? "Driver A is new, takes anything. Driver B has been online 11 hours."
-              : "Tap Accept on each — see what their day already looks like."}
+              ? "Driver A is new and takes anything. Driver B has been online 11 hours."
+              : "Tap Accept on each. See what their day already looks like."}
           </motion.div>
         </AnimatePresence>
       </div>

@@ -11,7 +11,7 @@ import { SceneSim } from "./scenes/sim.tsx";
 import { SceneThesis } from "./scenes/thesis.tsx";
 import { SceneWedge } from "./scenes/wedge.tsx";
 import { EASE } from "./shared.tsx";
-import { type SceneId, TOTAL, activeScene, useTime } from "./timeline.ts";
+import { SCENES, type SceneId, TOTAL, activeScene, useTime } from "./timeline.ts";
 
 const INTERACTIVE_SCENES = new Set<SceneId>(["compare", "driver", "audit"]);
 
@@ -22,15 +22,10 @@ function App() {
   const scene = activeScene(t);
   const blocked = INTERACTIVE_SCENES.has(scene.id) && !completed.has(scene.id);
 
+  // Stop the playhead when we hit the end; users can restart via the chrome bar.
   useEffect(() => {
-    if (t >= TOTAL) {
-      const id = setTimeout(() => {
-        setCompleted(new Set());
-        setT(0);
-      }, 2400);
-      return () => clearTimeout(id);
-    }
-  }, [t, setT]);
+    if (t >= TOTAL) setPlaying(false);
+  }, [t]);
 
   // Pause when entering an interactive scene the user hasn't completed yet.
   useEffect(() => {
@@ -66,7 +61,16 @@ function App() {
       case "sim":
         return <SceneSim t={t} scene={scene} />;
       case "audit":
-        return <SceneAudit onContinue={() => completeAndResume("audit")} />;
+        return (
+          <SceneAudit
+            onContinue={() => {
+              completeAndResume("audit");
+              const idx = SCENES.findIndex((s) => s.id === "audit");
+              const next = SCENES[idx + 1];
+              if (next) setT(next.start);
+            }}
+          />
+        );
       case "thesis":
         return <SceneThesis t={t} scene={scene} />;
       case "credits":

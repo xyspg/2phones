@@ -23,7 +23,7 @@ export function SceneFlip({ t, scene }: { t: number; scene: Scene }) {
         style={{ opacity: easeOut((p - 0.4) * 3) }}
       >
         Two drivers, same intersection. The platform offers each a different payout for the
-        exact same trip — based on what it predicts they'll accept.
+        exact same trip, based on what it predicts they will accept.
       </div>
     </div>
   );
