@@ -5,7 +5,7 @@ export function SceneIntro({ t, scene }: { t: number; scene: Scene }) {
   const p = sceneProgress(t, scene);
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-7 px-6 pb-10 pt-20 sm:px-10 sm:pt-20">
-      <div className={CAPTION_CLASS} style={{ opacity: easeOut(p * 4) }}>
+      <div className={`${CAPTION_CLASS} text-center`} style={{ opacity: easeOut(p * 4) }}>
         A Case Study in Algorithmic Wage Discrimination
       </div>
       <h1
