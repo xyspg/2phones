@@ -42,6 +42,17 @@ export function SceneThesis({ t, scene }: { t: number; scene: Scene }) {
         being paid for the same trip. The algorithm prevents class consciousness from
         forming, because the basic information needed to compare wages is hidden.
       </div>
+      <blockquote
+        className="m-0 max-w-[760px] font-serif text-[clamp(16px,2vw,22px)] font-normal italic leading-[1.4] text-ink/65"
+        style={{ opacity: easeOut((p - 0.6) * 2.5) }}
+      >
+        "It is not the consciousness of men that determines their being, but, on the
+        contrary, their social being that determines their consciousness."
+        <footer className="mt-2 font-sans text-[11px] not-italic tracking-[0.06em] text-ink/45 sm:text-[12px]">
+          Karl Marx ·{" "}
+          <span className="italic">A Contribution to the Critique of Political Economy</span>
+        </footer>
+      </blockquote>
     </div>
   );
 }

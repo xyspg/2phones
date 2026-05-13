@@ -102,6 +102,16 @@ export function SceneWedge({ t, scene }: { t: number; scene: Scene }) {
           each will tolerate.
         </div>
       </div>
+
+      <blockquote
+        className="m-0 max-w-[760px] text-center font-serif text-[clamp(18px,2.4vw,26px)] font-normal italic leading-[1.35] text-ink/65"
+        style={{ opacity: easeOut((p - 0.65) * 2) }}
+      >
+        "The worker is related to the product of his labour as to an alien object."
+        <footer className="mt-2 font-sans text-[11px] not-italic tracking-[0.06em] text-ink/45 sm:text-[12px]">
+          Karl Marx · <span className="italic">Estranged Labor</span>
+        </footer>
+      </blockquote>
     </div>
   );
 }

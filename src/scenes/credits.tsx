@@ -59,7 +59,7 @@ export function SceneCredits({ t, scene }: { t: number; scene: Scene }) {
         style={{ opacity: easeOut((p - 0.55) * 2) }}
       >
         <div className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-ink/45">
-          Case Study · Social In/Justice
+          Case Study · Global Works and Society: Modernity
         </div>
         <div className="font-serif text-[20px] font-normal italic text-ink/70 sm:text-[22px]">
           Patrick Yu · Eloise Yang · Jiaming Kang

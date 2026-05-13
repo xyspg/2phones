@@ -755,6 +755,13 @@ export function SceneAudit({ onContinue }: { onContinue: () => void }) {
         </div>
       </motion.div>
 
+      <blockquote className="m-0 max-w-[760px] text-center font-serif text-[clamp(18px,2.4vw,26px)] font-normal italic leading-[1.35] text-ink/65">
+        "Man is born free, and everywhere he is in chains."
+        <footer className="mt-2 font-sans text-[11px] not-italic tracking-[0.06em] text-ink/45 sm:text-[12px]">
+          Jean-Jacques Rousseau · <span className="italic">On the Social Contract</span>
+        </footer>
+      </blockquote>
+
       <motion.button
         type="button"
         onClick={onContinue}
