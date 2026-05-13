@@ -74,6 +74,79 @@ export function PhoneFrame({
   );
 }
 
+export function AndroidFrame({
+  deviceName,
+  battery = 87,
+  time = "8:47",
+  children,
+  label,
+}: {
+  deviceName?: string;
+  battery?: number;
+  time?: string;
+  children?: ReactNode;
+  label?: string;
+}) {
+  return (
+    <div className="flex flex-col items-center gap-3 sm:gap-3.5">
+      {label && (
+        <div className="font-system text-[11px] font-medium uppercase tracking-[0.14em] text-ink/50">
+          {label}
+        </div>
+      )}
+      <div className="relative h-[560px] w-[260px] rounded-[32px] bg-[#1a1a1a] p-1.5 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25),0_0_0_0.5px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.08)] sm:h-[660px] sm:w-[320px] sm:rounded-[40px] sm:p-2">
+        <div className="font-system relative h-full w-full overflow-hidden rounded-[26px] bg-white text-ink sm:rounded-[32px]">
+          <div className="relative z-[5] flex items-center justify-between px-5 pb-1.5 pt-3 text-[12px] font-medium sm:px-[22px] sm:pb-1.5 sm:pt-3.5 sm:text-[13px]">
+            <span style={{ fontVariantNumeric: "tabular-nums" }}>{time}</span>
+            <div className="absolute left-1/2 top-2.5 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-black sm:top-3 sm:h-[11px] sm:w-[11px]" />
+            <div className="flex items-center gap-[6px]">
+              <svg width="13" height="11" viewBox="0 0 13 11" fill="none">
+                <path d="M0.5 10.5 L12 10.5 L12 0.5 Z" fill="currentColor" />
+              </svg>
+              <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+                <path
+                  d="M6.5 1 C3.4 1 1 3 0.3 4 L6.5 9 L12.7 4 C12 3 9.6 1 6.5 1 Z"
+                  fill="currentColor"
+                />
+              </svg>
+              <svg width="20" height="11" viewBox="0 0 20 11" fill="none">
+                <rect
+                  x="0.5"
+                  y="2"
+                  width="17"
+                  height="7"
+                  rx="1.6"
+                  stroke="currentColor"
+                  strokeOpacity="0.45"
+                  fill="none"
+                />
+                <rect x="17.6" y="3.8" width="1.6" height="3.4" rx="0.6" fill="currentColor" fillOpacity="0.45" />
+                <rect
+                  x="2"
+                  y="3.5"
+                  width={Math.round((14 * battery) / 100)}
+                  height="4"
+                  rx="0.8"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </div>
+          {children}
+          <div className="pointer-events-none absolute inset-x-0 bottom-1.5 flex justify-center sm:bottom-2">
+            <div className="h-[3px] w-[88px] rounded-full bg-ink/35 sm:h-1 sm:w-[108px]" />
+          </div>
+        </div>
+      </div>
+      {deviceName && (
+        <div className="font-system whitespace-nowrap text-[10px] tracking-[0.1em] text-ink/40">
+          {deviceName}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export const ACCENT = "#111";
 
 export function MiniMap({

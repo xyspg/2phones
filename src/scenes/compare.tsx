@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { PRICE_DELTA, RIDER_PRICE_A, RIDER_PRICE_B } from "../data.ts";
-import { ACCENT, PhoneFrame, RiderApp } from "../mockups.tsx";
+import { ACCENT, AndroidFrame, PhoneFrame, RiderApp } from "../mockups.tsx";
 import { EASE } from "../shared.tsx";
 
 export function SceneCompare({ onBothRequested }: { onBothRequested: () => void }) {
@@ -44,7 +44,7 @@ export function SceneCompare({ onBothRequested }: { onBothRequested: () => void 
         transition={{ duration: 0.5, ease: EASE }}
         className="flex flex-col items-center gap-12 sm:flex-row sm:items-start sm:gap-12 lg:gap-20"
       >
-        <PhoneFrame
+        <AndroidFrame
           deviceName="DEVICE A · ANDROID"
           battery={64}
           time="8:47"
@@ -58,7 +58,7 @@ export function SceneCompare({ onBothRequested }: { onBothRequested: () => void 
             onRequest={() => setReqA(true)}
             dotPos={revealed ? 0.3 : 0.2}
           />
-        </PhoneFrame>
+        </AndroidFrame>
         <PhoneFrame
           deviceName="DEVICE B · IPHONE"
           battery={94}
