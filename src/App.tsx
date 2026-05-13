@@ -34,6 +34,35 @@ function App() {
     }
   }, [scene.id, completed]);
 
+  // On mount, respect an initial hash like #thesis and seek the playhead there.
+  useEffect(() => {
+    const id = window.location.hash.slice(1) as SceneId;
+    const target = SCENES.find((s) => s.id === id);
+    if (target) setT(target.start);
+  }, [setT]);
+
+  // Keep the URL hash in sync with the active scene as the timeline advances.
+  useEffect(() => {
+    const desired = `#${scene.id}`;
+    if (window.location.hash !== desired) {
+      window.history.replaceState(null, "", desired);
+    }
+  }, [scene.id]);
+
+  // Back/forward and manual hash edits seek the playhead to that scene's start.
+  useEffect(() => {
+    const onHashChange = () => {
+      const id = window.location.hash.slice(1) as SceneId;
+      const target = SCENES.find((s) => s.id === id);
+      if (!target) return;
+      setCompleted(new Set());
+      setT(target.start);
+      setPlaying(true);
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [setT]);
+
   const completeAndResume = useCallback((id: SceneId) => {
     setCompleted((prev) => {
       if (prev.has(id)) return prev;
