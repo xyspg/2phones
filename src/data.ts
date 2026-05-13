@@ -36,7 +36,7 @@ export const MIN_WAGE_NY = 19.96;
 // (Worker Info Exchange dataset) or label the column "Illustrative scenario".
 export const MARCUS: Driver = {
   name: "Marcus · 4★.93",
-  hoursOnline: 3,
+  hoursOnline: 6,
   battery: 71,
   payout: 22.5,
   acceptanceRate: 92,
@@ -47,7 +47,7 @@ export const MARCUS: Driver = {
   ],
   newTrip: { time: "8:47", area: "JFK", pay: 22.5 },
   priorCount: 13,
-  priorTotal: 316.3,
+  priorTotal: 247.5,
 };
 
 // TODO: HALLUCINATION + NAME COLLISION — "Felix" overlaps with real Hawai'i organizer

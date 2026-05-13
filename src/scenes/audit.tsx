@@ -207,8 +207,9 @@ function Slider({
     if (!r) return;
     const p = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
     const raw = min + p * (max - min);
-    const snapped = Math.round(raw / step) * step;
-    onChange(+snapped.toFixed(2));
+    const snapped = +(Math.round(raw / step) * step).toFixed(2);
+    if (snapped === value) return;
+    onChange(snapped);
   };
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -525,7 +526,7 @@ export function SceneAudit({ onContinue }: { onContinue: () => void }) {
   // flashKey only bumps on preset apply — not on every drag pixel, which
   // would restart the priceFlash animation continuously and never let it play.
   const [flashKey, setFlashKey] = useState(0);
-  const [activePreset, setActivePreset] = useState<string | null>("Felix");
+  const [activePreset, setActivePreset] = useState<string | null>(null);
   const [interacted, setInteracted] = useState(false);
   const [showFormula, setShowFormula] = useState(false);
 
@@ -536,9 +537,9 @@ export function SceneAudit({ onContinue }: { onContinue: () => void }) {
   const platformPct = Math.round((platformTake / TRIP.riderPrice) * 100);
 
   const setVal = (k: SignalKey, v: number) => {
-    setValues((prev) => ({ ...prev, [k]: v }));
-    setActivePreset(null);
-    setInteracted(true);
+    setValues((prev) => (prev[k] === v ? prev : { ...prev, [k]: v }));
+    if (activePreset !== null) setActivePreset(null);
+    if (!interacted) setInteracted(true);
   };
   const applyPreset = (p: (typeof PRESETS)[number]) => {
     setValues(p.values);
@@ -576,6 +577,12 @@ export function SceneAudit({ onContinue }: { onContinue: () => void }) {
           inputs. We rebuilt a plausible reconstruction — every signal below is a kind
           documented in driver complaints and Dubal's 2023 analysis.
         </p>
+        {!interacted && (
+          <div className="mt-1 flex items-center gap-2 rounded-full border border-ink/15 bg-white px-3.5 py-1.5 font-mono text-[11px] tracking-[0.04em] text-ink/65">
+            <span aria-hidden="true">↓</span>
+            <span>Drag any slider — or pick a preset — to see the offer change.</span>
+          </div>
+        )}
       </motion.div>
 
       <motion.div

@@ -83,7 +83,7 @@ function App() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35, ease: EASE }}
-          className="scene-stage flex flex-1 flex-col"
+          className="flex flex-1 flex-col"
         >
           {renderScene()}
         </motion.div>
