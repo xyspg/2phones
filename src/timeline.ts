@@ -7,6 +7,7 @@ export type SceneId =
   | "driver"
   | "wedge"
   | "sim"
+  | "audit"
   | "thesis"
   | "credits";
 
@@ -26,8 +27,9 @@ const SCENE_DEFS: SceneDef[] = [
   { id: "driver", duration: 12, label: "04 / Same trip — different pay" },
   { id: "wedge", duration: 12, label: "05 / Where the difference goes" },
   { id: "sim", duration: 18, label: "06 / Live: the algorithm learns" },
-  { id: "thesis", duration: 12, label: "07 / Algorithmic wage discrimination" },
-  { id: "credits", duration: 12, label: "08 / Credits" },
+  { id: "audit", duration: 22, label: "07 / Audit the dashboard Felix can't see" },
+  { id: "thesis", duration: 12, label: "08 / Algorithmic wage discrimination" },
+  { id: "credits", duration: 12, label: "09 / Credits" },
 ];
 
 export const SCENES: Scene[] = SCENE_DEFS.reduce<Scene[]>((acc, def) => {

@@ -19,7 +19,7 @@ const TRIPS = [
 // Reserve a tail of the scene so the final state lingers; trips fill the rest evenly.
 const TRIPS_TAIL_HOLD_S = 4;
 // TODO: HALLUCINATION — $1.85/mi "city baseline" is not sourced. Replace with a real
-// per-mile baseline from a city study (e.g. NYC TLC, SF MTA driver-pay reports).
+// per-mile baseline from a city study (e.g. NYC TLC driver-pay reports).
 const BASE_RATE = 1.85;
 
 export function SceneSim({ t, scene }: { t: number; scene: Scene }) {
@@ -43,12 +43,12 @@ export function SceneSim({ t, scene }: { t: number; scene: Scene }) {
   const toleranceScore = avgPerMi >= BASE_RATE ? 0.34 : avgPerMi > 1.45 ? 0.61 : 0.83;
   const baseRate = BASE_RATE;
 
-  // TODO: HALLUCINATION — these signal labels are *speculation* about Uber's
-  // model inputs. Acceptance rate and hours online are publicly known to be tracked.
-  // "Last decline streak", "Phone battery", "Days since payout", and especially
-  // "Tolerance score (model)" are NOT documented features — they are educated guesses.
-  // Either (a) restrict to features Dubal/Oxford have documented, or (b) add a UI
-  // disclaimer that this is a hypothesized model, not a leaked one.
+  // Signals split:
+  //   Named in our essay (Section 4): acceptance rate, hours online, decline streak.
+  //   Plausible but speculative: phone battery, days since payout, tolerance score.
+  // The whole panel is a hypothesized reconstruction of the model, not a leaked
+  // feature list. Caption above ("Live · the algorithm learns") + the audit-scene
+  // copy already flag this as illustrative.
   const profileSignals: { label: string; val: string; t: number; hi?: boolean }[] = [
     { label: "Acceptance rate", val: `${Math.min(98, 60 + tripIdx * 5)}%`, t: 0.5 },
     { label: "Hours online today", val: `${(tripIdx * 0.9).toFixed(1)}h`, t: 1.2 },

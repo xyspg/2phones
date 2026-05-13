@@ -25,9 +25,10 @@ export const PRICE_DELTA = +(RIDER_PRICE_B - RIDER_PRICE_A).toFixed(2);
 export const TRIP_DISTANCE_MI = "14.2";
 export const TRIP_DURATION_MIN = 28;
 
-// TODO: VERIFY — SF min wage was $18.67/hr in 2024 per ca.gov; confirm 2026 figure
-// before final submit. Add source attribution somewhere in credits or footnote.
-export const MIN_WAGE_SF = 18.67;
+// TODO: VERIFY — NYC TLC minimum pay rule for app-based for-hire drivers was
+// roughly $19.96/hr (post-expenses) in 2024; confirm 2026 figure before final
+// submit. Add source attribution somewhere in credits or footnote.
+export const MIN_WAGE_NY = 19.96;
 
 // TODO: HALLUCINATION — driver "Marcus" is fictional. All recent-trip rows,
 // payouts, hours-online, and acceptance-rate values below are illustrative,
@@ -40,11 +41,11 @@ export const MARCUS: Driver = {
   payout: 22.5,
   acceptanceRate: 92,
   recent: [
-    { time: "8:24", area: "Mission", pay: 22.4 },
-    { time: "8:32", area: "Hayes Valley", pay: 18.2 },
-    { time: "8:41", area: "SoMa", pay: 24.6 },
+    { time: "8:24", area: "SoHo", pay: 22.4 },
+    { time: "8:32", area: "Chelsea", pay: 18.2 },
+    { time: "8:41", area: "Midtown", pay: 24.6 },
   ],
-  newTrip: { time: "8:47", area: "SFO", pay: 22.5 },
+  newTrip: { time: "8:47", area: "JFK", pay: 22.5 },
   priorCount: 13,
   priorTotal: 316.3,
 };
@@ -60,11 +61,11 @@ export const FELIX: Driver = {
   payout: 11.1,
   acceptanceRate: 48,
   recent: [
-    { time: "5:18", area: "Bayview", pay: 8.4 },
-    { time: "6:42", area: "Outer Sunset", pay: 9.2 },
-    { time: "7:55", area: "Castro", pay: 7.8 },
+    { time: "5:18", area: "East New York", pay: 8.4 },
+    { time: "6:42", area: "Rockaway", pay: 9.2 },
+    { time: "7:55", area: "Bushwick", pay: 7.8 },
   ],
-  newTrip: { time: "8:47", area: "SFO", pay: 11.1 },
+  newTrip: { time: "8:47", area: "JFK", pay: 11.1 },
   priorCount: 6,
   priorTotal: 47.2,
 };

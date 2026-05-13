@@ -111,15 +111,13 @@ export function SceneCompare({ onBothRequested }: { onBothRequested: () => void 
               </svg>
               <span className="text-ink/50">${RIDER_PRICE_B.toFixed(2)}</span>
             </div>
-            {/* TODO: HALLUCINATION — these two lines speculate on the *internals*
-                of Uber's pricing model (battery / device age / price-shopping history
-                as inputs). Uber has never disclosed these as features. Reframe as
-                "the kind of signals the model is suspected of using" or cite Dubal
-                p.[X] / Worker Info Exchange audit for the actual documented signals. */}
+            {/* Device differences shown above are an illustrative scenario for the
+                two-phones experiment in the group_doc — not a leaked feature list.
+                The essay only commits to acceptance rate, hours online, and decline
+                streak as documented driver-side signals. */}
             <div className="max-w-[500px] text-center font-sans text-[12px] text-ink/55">
-              Older Android, lower battery, history of price-shopping.
-              <br />
-              Newer iPhone, full battery, history of accepting first quote.
+              Different phones, different price-shopping histories — the kind of
+              signals the model is suspected of personalizing on.
             </div>
           </motion.div>
         )}

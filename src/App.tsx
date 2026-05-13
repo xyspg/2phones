@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { Chrome, Stage } from "./chrome.tsx";
+import { SceneAudit } from "./scenes/audit.tsx";
 import { SceneCompare } from "./scenes/compare.tsx";
 import { SceneCredits } from "./scenes/credits.tsx";
 import { SceneDriver } from "./scenes/driver.tsx";
@@ -12,7 +13,7 @@ import { SceneWedge } from "./scenes/wedge.tsx";
 import { EASE } from "./shared.tsx";
 import { type SceneId, TOTAL, activeScene, useTime } from "./timeline.ts";
 
-const INTERACTIVE_SCENES = new Set<SceneId>(["compare", "driver"]);
+const INTERACTIVE_SCENES = new Set<SceneId>(["compare", "driver", "audit"]);
 
 function App() {
   const [playing, setPlaying] = useState(true);
@@ -64,6 +65,8 @@ function App() {
         return <SceneWedge t={t} scene={scene} />;
       case "sim":
         return <SceneSim t={t} scene={scene} />;
+      case "audit":
+        return <SceneAudit onContinue={() => completeAndResume("audit")} />;
       case "thesis":
         return <SceneThesis t={t} scene={scene} />;
       case "credits":
@@ -80,7 +83,7 @@ function App() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35, ease: EASE }}
-          className="flex flex-1 flex-col"
+          className="scene-stage flex flex-1 flex-col"
         >
           {renderScene()}
         </motion.div>

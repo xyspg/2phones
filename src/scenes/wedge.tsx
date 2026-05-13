@@ -85,33 +85,23 @@ export function SceneWedge({ t, scene }: { t: number; scene: Scene }) {
           {/* TODO: VERIFY — Uber's "headline commission" of ~25% is roughly real
               (cited frequently in coverage of Upfront Fares). Confirm against an
               Uber S-1 or earnings call quote. */}
-          <StatRow label="Headline 'commission'" value="25.0%" delay={1.2} t={t} scene={scene} />
-          {/* TODO: HALLUCINATION (HIGH PRIORITY) — "42.7%" is a fabricated specific stat.
-              Worker Info Exchange and Dubal have documented platform takes well above
-              the headline 25%, sometimes >40%, but the precise 42.7% median is NOT
-              from any source we have. REPLACE before submission with either:
-              (a) the real median from Worker Info Exchange / Oxford June 2025 audit,
-              (b) Dubal 2023 (Columbia Law Review) figure, or
-              (c) remove this row entirely. */}
+          <StatRow label="Headline 'commission'" value="~25%" delay={1.2} t={t} scene={scene} />
           <StatRow
-            label="Actual platform take (median)"
-            value="42.7%"
+            label="This trip's actual take"
+            value={`${Math.round((platformCut / riderHi) * 100)}%`}
             delay={1.4}
             t={t}
             scene={scene}
           />
         </div>
 
-        {/* TODO: ATTRIBUTION — this paragraph paraphrases Dubal's central argument
-            (decoupling of rider price and driver pay) without crediting her. Add an
-            inline cite ("as Dubal argues, …") or a footnote-style attribution. */}
         <div
           className="mt-5 rounded-[10px] bg-paper px-4 py-3.5 text-[12.5px] leading-[1.5] text-ink/70 sm:text-[13px]"
           style={{ opacity: easeOut((p - 0.5) * 2) }}
         >
-          The classic ride-hailing pitch — "we just take 25%" — assumes rider price and driver
-          pay are tied to the same trip. They aren't. Both are personalized, separately, to the
-          maximum each side will tolerate.
+          As Veena Dubal argues, the classic ride-hailing pitch — "we just take 25%" — assumes
+          rider price and driver pay are tied to the same trip. They aren't. Both are
+          personalized, separately, to the maximum each side will tolerate.
         </div>
       </div>
     </div>

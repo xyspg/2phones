@@ -173,12 +173,12 @@ export function RiderApp({
         <div className="flex flex-col">
           <div className="flex items-center gap-3 py-1.5">
             <div className="h-2 w-2 rounded-full bg-ink" />
-            <div className="text-[13px] font-medium text-ink">Pier 7 Apartments</div>
+            <div className="text-[13px] font-medium text-ink">East Village Apartments</div>
           </div>
           <div className="ml-[3px] h-3.5 w-px bg-ink/[0.08]" />
           <div className="flex items-center gap-3 py-1.5">
             <div className="h-2 w-2 bg-ink" />
-            <div className="text-[13px] font-medium text-ink">SFO · Terminal 2</div>
+            <div className="text-[13px] font-medium text-ink">JFK · Terminal 4</div>
           </div>
         </div>
 
@@ -286,7 +286,7 @@ export function DriverApp({
                 <b className="font-semibold text-ink">{duration}</b> min
               </span>
               <span>·</span>
-              <span>SFO</span>
+              <span>JFK</span>
             </div>
 
             <div className="my-1 h-px bg-ink/[0.08]" />

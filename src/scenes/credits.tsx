@@ -4,18 +4,18 @@ import { type Scene, easeOut, sceneProgress } from "../timeline.ts";
 const INTERVENTIONS = [
   {
     n: "01",
-    title: "Algorithmic transparency",
-    d: "Drivers receive the actual pay formula and the inputs used to compute their offer.",
+    title: "No personalization on pay",
+    d: "Pay tied only to trip variables — time, distance, zone, waiting time — never to a driver's individual desperation signals.",
   },
   {
     n: "02",
-    title: "No personalization on pay",
-    d: "Pay tied only to time, distance, and zone — never to the worker's individual desperation signals.",
+    title: "Mandatory algorithm disclosure",
+    d: "Uber, Doordash, Instacart, and similar platforms must publish a reproducible pay formula the public can audit.",
   },
   {
     n: "03",
-    title: "Sectoral bargaining",
-    d: "Drivers negotiate floors collectively, with audit rights over the model.",
+    title: "Driver-owned audits",
+    d: "Independent driver-led organizations — including the software engineers who drive part-time — hold standing audit rights over the model.",
   },
 ];
 

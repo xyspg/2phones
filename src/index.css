@@ -97,3 +97,47 @@ body {
 .scroll-hint-bob {
   animation: scrollHintBob 1.8s ease-in-out infinite;
 }
+
+@keyframes priceFlash {
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+  35% {
+    background: rgba(255, 230, 0, 0.18);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.scene-stage {
+  /* Scale up scene content on screens larger than a 14" MacBook viewport.
+     `zoom` is used instead of `transform: scale` so layout reflows and the
+     surrounding chrome stays at native size. */
+}
+@media (min-width: 1600px) {
+  .scene-stage {
+    zoom: 1.15;
+  }
+}
+@media (min-width: 1920px) {
+  .scene-stage {
+    zoom: 1.3;
+  }
+}
+@media (min-width: 2400px) {
+  .scene-stage {
+    zoom: 1.5;
+  }
+}

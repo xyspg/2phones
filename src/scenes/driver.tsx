@@ -4,7 +4,7 @@ import {
   type Driver,
   FELIX,
   MARCUS,
-  MIN_WAGE_SF,
+  MIN_WAGE_NY,
   type Trip,
   TRIP_DISTANCE_MI,
   TRIP_DURATION_MIN,
@@ -76,11 +76,8 @@ export function SceneDriver({ onBothAccepted }: { onBothAccepted: () => void }) 
             transition={{ duration: 0.35 }}
             className="mt-2.5 font-mono text-[13px] tracking-[0.01em] text-ink/55 sm:text-[14.5px]"
           >
-            {/* TODO: HALLUCINATION — "rent due Friday" is invented narrative.
-                Either remove the personal detail or replace with a real driver
-                testimony from Worker Info Exchange or Rideshare Drivers United. */}
             {both
-              ? "Driver A is new, takes anything. Driver B has rent due Friday."
+              ? "Driver A is new, takes anything. Driver B has been online 11 hours."
               : "Tap Accept on each — see what their day already looks like."}
           </motion.div>
         </AnimatePresence>
@@ -109,15 +106,14 @@ export function SceneDriver({ onBothAccepted }: { onBothAccepted: () => void }) 
             transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
             className="mt-2 max-w-[640px] text-center font-mono text-[11px] leading-[1.6] text-ink/60 sm:text-[11.5px]"
           >
-            {/* TODO: HALLUCINATION — "HIGH TOLERANCE FOR LOW PAY" is an invented
-                classifier label. Dubal's argument is consistent with this kind of
-                personalization, but Uber has never disclosed such a label.
-                Either reframe as "the model is suspected of categorizing drivers like…"
-                or replace with a real category from Worker Info Exchange disclosures. */}
+            {/* Signals named match the essay (Section 4): acceptance rate, hours
+                online, decline streak. The "tolerance" framing mirrors Dubal's
+                language in Columbia Law Review 123:7 (2023). The bracketed label
+                is illustrative — Uber has not disclosed any such classifier name. */}
             Felix has been online {FELIX.hoursOnline} hours, declined two short trips, low
-            battery, end of pay period.
+            acceptance rate.
             <br />
-            The model has classified him as{" "}
+            On Dubal's reading, the model treats this as{" "}
             <span className="rounded bg-ink px-2 py-0.5 text-white">
               HIGH&nbsp;TOLERANCE&nbsp;FOR&nbsp;LOW&nbsp;PAY
             </span>
@@ -175,7 +171,7 @@ function Ledger({ header, driver }: { header: string; driver: Driver }) {
   const total = priorTotal + newTrip.pay;
   const tripCount = priorCount + 1;
   const perHour = total / hoursOnline;
-  const belowMinWage = perHour < MIN_WAGE_SF;
+  const belowMinWage = perHour < MIN_WAGE_NY;
 
   return (
     <div className="flex flex-1 flex-col gap-2">
@@ -223,7 +219,7 @@ function Ledger({ header, driver }: { header: string; driver: Driver }) {
             transition={{ duration: 0.4, delay: 0.5 }}
             className="text-right font-mono text-[10.5px] text-ink/55"
           >
-            below SF min wage (${MIN_WAGE_SF.toFixed(2)}/hr)
+            below NY min wage (${MIN_WAGE_NY.toFixed(2)}/hr)
           </motion.div>
         )}
       </div>

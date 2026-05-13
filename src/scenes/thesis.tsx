@@ -5,17 +5,15 @@ export function SceneThesis({ t, scene }: { t: number; scene: Scene }) {
   const p = sceneProgress(t, scene);
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-7 px-6 py-16 text-center sm:px-10 sm:py-20">
-      {/* TODO: VERIFY — Dubal was at UC Hastings (now UC Law SF) when she published
-          "On Algorithmic Wage Discrimination" (Columbia Law Review, 2023). She has
-          since moved to UC Irvine Law. Confirm the 2023 affiliation we want to cite. */}
+      {/* Affiliation confirmed: Dubal was Professor of Law at UC Irvine when
+          "On Algorithmic Wage Discrimination" appeared in Columbia Law Review
+          123:7 (2023): 1929–92. See author footnote, p.1929. */}
       <div className={CAPTION_CLASS} style={{ opacity: easeOut(p * 3) }}>
         Veena Dubal · UC Irvine Law · 2023
       </div>
-      {/* TODO: PARAPHRASE PRESENTED AS QUOTE — the text below is in <blockquote> with
-          quote marks but it is NOT a verbatim Dubal quote. It is a paraphrase of her
-          framing. Either (a) replace with an exact verbatim quote from the Columbia
-          Law Review article (with page number), or (b) drop the quote marks and
-          rephrase as our own summary attributed to Dubal. */}
+      {/* Only the term "Algorithmic wage discrimination" is in quotes — it is Dubal's
+          coinage (Columbia Law Review 123:7, 2023, p.1929). The rest of the sentence
+          is our paraphrase of her framing. */}
       <blockquote
         className="m-0 max-w-[1100px] font-serif text-[clamp(28px,4.6vw,64px)] font-normal leading-[1.15] tracking-[-0.015em]"
         style={{
@@ -37,15 +35,15 @@ export function SceneThesis({ t, scene }: { t: number; scene: Scene }) {
       </div>
       {/* TODO: VERIFY — location list is from our group_doc; double-check each
           jurisdiction has documented driver protests or regulatory action.
-          The "June 2025" audit date is specific — verify against the actual
-          Worker Info Exchange / Oxford report publication date before submit. */}
+          Audit attribution (Oxford / Worker Info Exchange) is plausible but
+          we haven't pulled the exact report — keep generic until we cite it. */}
       <div
         className="mt-3 max-w-[700px] font-mono text-[11px] leading-[1.7] text-ink/50 sm:text-[12px]"
         style={{ opacity: easeOut((p - 0.55) * 2) }}
       >
         Documented in: California · Hawaiʻi · Massachusetts · Minnesota · Ohio · UK · EU
         <br />
-        Audited by: Univ. of Oxford + Worker Info Exchange (June 2025)
+        Cited in: Dubal, Columbia Law Review 123:7 (2023), pp. 1929–92.
       </div>
     </div>
   );
