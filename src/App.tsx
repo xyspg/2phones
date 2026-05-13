@@ -13,23 +13,26 @@ import { SceneWedge } from "./scenes/wedge.tsx";
 import { EASE } from "./shared.tsx";
 import { SCENES, type SceneId, TOTAL, activeScene, useTime } from "./timeline.ts";
 
-const INTERACTIVE_SCENES = new Set<SceneId>(["compare", "driver", "audit"]);
+// Audit is the only scene that still pauses the playhead — its sandbox needs
+// sustained interaction time. Compare and driver let the timer run through;
+// the tap-to-reveal still works via their internal state.
+const PAUSE_ON_ENTER = new Set<SceneId>(["audit"]);
 
 function App() {
   const [playing, setPlaying] = useState(true);
   const [t, setT] = useTime(playing);
   const [completed, setCompleted] = useState<Set<SceneId>>(() => new Set());
   const scene = activeScene(t);
-  const blocked = INTERACTIVE_SCENES.has(scene.id) && !completed.has(scene.id);
+  const blocked = PAUSE_ON_ENTER.has(scene.id) && !completed.has(scene.id);
 
   // Stop the playhead when we hit the end; users can restart via the chrome bar.
   useEffect(() => {
     if (t >= TOTAL) setPlaying(false);
   }, [t]);
 
-  // Pause when entering an interactive scene the user hasn't completed yet.
+  // Pause when entering a scene that needs sustained interaction.
   useEffect(() => {
-    if (INTERACTIVE_SCENES.has(scene.id) && !completed.has(scene.id)) {
+    if (PAUSE_ON_ENTER.has(scene.id) && !completed.has(scene.id)) {
       setPlaying(false);
     }
   }, [scene.id, completed]);
